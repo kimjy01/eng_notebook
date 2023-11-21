@@ -48,6 +48,9 @@ public class Letters {
 	@Column(name = "nickname")
 	private String nickname;
 	
+	@Column(name = "stickerDesign")
+	private String stickerDesign;
+	
 	// user와 일대다 관계 (양방향)
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId")
