@@ -69,5 +69,12 @@ public class Letters {
 	public void setNotebooks(Notebooks notebooks) {
 	    this.notebooks = notebooks;
 	}
+
+	
+	// 황이 추가 코드
+	public void setLetterId(long letterId2) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

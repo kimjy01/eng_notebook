@@ -28,10 +28,12 @@
 <div id="sticker4" class="sticker"></div>
 
 <script>
-    function showSticker(stickerNumber) {
+    function showSticker(sticker_design) {
 		// 버튼 클릭시 해당 스티커 화면으로 이동
-    	window.location.href = '/letter/' + stickerNumber;
+		
+    	window.location.href = '/letter/write/' + sticker_design;
     }
+    
 </script>
 
 <button type="button" onclick="location.href='/logout'">로그아웃</button>

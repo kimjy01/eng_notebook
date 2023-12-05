@@ -1,34 +1,38 @@
-<!-- 데이터 출력 되는지 확인용 임시 페이지 입니다^^ -->
+<!-- letterList.html -->
 
 <!DOCTYPE html>
-<html xmlns="http://www.thymleaf.org">
-	<head>
-		<meta charset="UTF-8">
-		<title>편지 리스트~!</title>
-		<style>
-			.layout {
-				width: 500px;
-				margin: 0 auto;
-				margin-top: 40px;
-			}
-		</style>
-	</head>
-	<body>
-		<div class="layout">
-			<table>
-				<thead>
-					<tr>
-						<th>노트북 번호</th>
-						<th>편지 번호</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="letter : ${list}">
-						<td th:text="${letter.nickname}"></td>
-						<td th:text="${letter.content}">내용</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</body>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>편지 목록</title>
+</head>
+<body>
+	
+<h2>넘어옴 ㅊㅋ</h2>
+
+<!-- 작성된 편지 목록 출력 -->
+<div th:if="${not #lists.isEmpty(lettersList)}">
+    <h2>편지가 왔어욥~~</h2>
+    <ul>
+        <li th:each="letter : ${lettersList}">
+            <p>
+                <strong>편지 번호:</strong> <span th:text="${letter.letterId}"></span>
+                &nbsp;&nbsp;&nbsp;
+                <strong>닉네임:</strong> <span th:text="${letter.nickname}"></span>
+                &nbsp;&nbsp;&nbsp;
+                <a th:href="@{/letter/content/{letterId}(letterId=${letter.letterId})}">편지 내용 보기</a>
+            </p>
+        </li>
+    </ul>
+</div>
+
+<!-- 내용이나 닉네임이 null이 아닐때 -->
+<div th:if="${content != null and nickname != null}">
+    <h2>작성된 편지 내용</h2>
+    <p><strong>편지 번호:</strong> <span th:text="${letterId}"></span></p>
+    <p><strong>닉네임:</strong> <span th:text="${nickname}"></span></p>
+    <p><strong>내용:</strong> <span th:text="${content}"></span></p>
+</div>
+
+</body>
 </html>
