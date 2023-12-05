@@ -1,6 +1,6 @@
-package com.spring.notebook.user.controller;
+package com.spring.notebook.controller;
 
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.context.SecurityContextHolder;		
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Controller
-public class UserController {
+public class UserController  {
 	
 	@GetMapping("/login")
 	public String login() {
