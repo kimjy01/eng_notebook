@@ -17,7 +17,23 @@
 </head>
 <body>
 
-<h2>hello</h2>
+<button onclick="showSticker(1)">Sticker 1</button>
+<button onclick="showSticker(2)">Sticker 2</button>
+<button onclick="showSticker(3)">Sticker 3</button>
+<button onclick="showSticker(4)">Sticker 4</button>
+
+<div id="sticker1" class="sticker"></div>
+<div id="sticker2" class="sticker"></div>
+<div id="sticker3" class="sticker"></div>
+<div id="sticker4" class="sticker"></div>
+
+<script>
+    function showSticker(stickerNumber) {
+		// 버튼 클릭시 해당 스티커 화면으로 이동
+    	window.location.href = '/letter/' + stickerNumber;
+    }
+</script>
+
 <button type="button" onclick="location.href='/logout'">로그아웃</button>
 
 </body>
