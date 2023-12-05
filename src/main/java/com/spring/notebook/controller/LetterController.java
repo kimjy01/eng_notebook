@@ -1,22 +1,15 @@
 package com.spring.notebook.controller;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-//import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.notebook.entity.Letters;
-import com.spring.notebook.repository.LetterRepository;
-//import com.spring.notebook.entity.Letters;
 import com.spring.notebook.service.LetterService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -38,7 +31,6 @@ public class LetterController {
 	// 해당 편지지 화면으로 작성하러 감
 	@GetMapping("/letter/write/{stickerDesign}")
 	public String stickerPage(@PathVariable String stickerDesign, Model model) {
-//		Letters letter = letterService.getStickerInfoByLetterId(stickerNumber);
 		model.addAttribute("stickerDesign", stickerDesign);
 		log.info(stickerDesign);
 		return "letterWrite";
