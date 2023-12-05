@@ -1,6 +1,7 @@
 package com.spring.notebook.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,14 +19,14 @@ public class LetterService {
 		this.letterRepository = letterRepository;
 	}
 	
-	public Letters getStickerInfoByLetterId(Long stickerNumber) {
+	public Letters getStickerInfoByLetterId(Long letterId) {
 		// LetterId로 Letter를 조회해 반환
-		return letterRepository.findById((long) stickerNumber)
-				.orElseThrow(() -> new RuntimeException("해당하는 편지가 없어요 (id : " + stickerNumber + ")"));
+		return letterRepository.findByletterId(letterId)
+				.orElseThrow(() -> new RuntimeException("해당하는 편지가 없어요 (id : " + letterId + ")"));
 	}
 	
 	// 편지 저장
-	public void saveLetter(Letters letter) {
+	public void save(Letters letter) {
 		letterRepository.save(letter);
 	}
 	
@@ -38,4 +39,5 @@ public class LetterService {
 	public List<Letters> letterList() {
 		return letterRepository.findAll();
 	}
+
 }

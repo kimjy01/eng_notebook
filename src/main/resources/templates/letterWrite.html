@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <!-- 확인용 임시 페이지 -->
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
 	<title>편지 작성 페이지~!</title>
@@ -28,7 +28,8 @@
 <body>
 	<div class="layout">
 		<form action="/letter/list" method="post">
-			<input name="nickname" type="text">
+			<input type="hidden" th:value="${stickerDesign}" name="stickerDesign"/>
+			<input name="nickname" type="text"/>
 			<textarea name="content"></textarea>
 			<button type="submit">작성</button>
 		</form>
