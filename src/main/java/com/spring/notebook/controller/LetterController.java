@@ -1,5 +1,7 @@
 package com.spring.notebook.controller;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,10 +47,14 @@ public class LetterController {
 		String content = request.getParameter("content");
 		String stickerDesign = request.getParameter("stickerDesign");
 		
+		// openDate 기본값 -> 2023-12-25로 default
+		LocalDate defaultOpenDate = LocalDate.of(2023, 12, 25);
+		
 		Letters letter = Letters.builder()
                 .content(content)
                 .nickname(nickname)
                 .stickerDesign(stickerDesign)
+                .openDate(defaultOpenDate)
                 .build();
 		
 		letterService.save(letter);
