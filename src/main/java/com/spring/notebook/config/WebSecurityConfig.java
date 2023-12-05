@@ -9,8 +9,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import com.spring.notebook.service.PrincipalOauth2UserService;
-import com.spring.notebook.service.UserDetailService;
+import com.spring.notebook.user.service.PrincipalOauth2UserService;
+import com.spring.notebook.user.service.UserDetailService;
 
 import lombok.RequiredArgsConstructor;
 
