@@ -1,5 +1,6 @@
 package com.spring.notebook.service;
 
+import java.security.SecureRandom;
 import java.util.Map;	
 import java.util.Optional;
 
@@ -11,6 +12,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import com.spring.notebook.entity.PrincipalDetails;
+import com.spring.notebook.entity.Roles;
 import com.spring.notebook.entity.Users;
 import com.spring.notebook.oauth.GoogleUserInfo;
 import com.spring.notebook.oauth.KakaoUserInfo;
@@ -55,23 +57,42 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 			oAuth2UserInfo = new KakaoUserInfo( (Map)oAuth2User.getAttributes());
 		}
 
-		String provider_id = oAuth2UserInfo.getProviderId();
 		String email = oAuth2UserInfo.getEmail();
-		String social_id = provider + "_" + provider_id;
 		
 		Optional<Users> optionalUsers = userRepository.findByEmail(email);
 		Users users = null;
 		
 		if (optionalUsers.isEmpty()) {
+			
+			//식별자 생성
+			String shortId = generateShortId();
+			
 			users = Users.builder()
 					.email(email)
+					.userUrl(shortId)
+					.roles(Roles.USER)
 					.build();
 			userRepository.save(users);
 		} else {
 			users = optionalUsers.get();
 		}
 		
-		
 		return new PrincipalDetails(users, oAuth2User.getAttributes());
 	}
+	
+	private String generateShortId() {
+        String CHARACTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        int ID_LENGTH = 8;
+
+        SecureRandom random = new SecureRandom();
+        StringBuilder sb = new StringBuilder(ID_LENGTH);
+
+        for (int i = 0; i < ID_LENGTH; i++) {
+            int randomIndex = random.nextInt(CHARACTERS.length());
+            char randomChar = CHARACTERS.charAt(randomIndex);
+            sb.append(randomChar);
+        }
+
+        return sb.toString();
+    }
 }
