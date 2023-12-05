@@ -1,6 +1,6 @@
-package com.spring.notebook.user.service;
+package com.spring.notebook.service;
 
-import java.util.Map;
+import java.util.Map;	
 import java.util.Optional;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
