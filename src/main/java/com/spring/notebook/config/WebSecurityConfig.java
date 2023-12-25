@@ -48,7 +48,7 @@ public class WebSecurityConfig {
 			    // oauth2 login
 			    .oauth2Login(oauth2Login -> oauth2Login
 		    	    .loginPage("/login")
-		    	    .defaultSuccessUrl("/")
+		    	    .defaultSuccessUrl("/update", true)
 		    	    .userInfoEndpoint(userInfo -> userInfo
 		    	        .userService(principalOauth2UserService)
 		    	    )

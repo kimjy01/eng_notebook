@@ -51,6 +51,11 @@ public class Letters {
 	@Column(name = "stickerDesign")
 	private String stickerDesign;
 	
+	// letterDesign 참조 (단방향이므로 letterDesign에서는 참조 불가)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "letterDesignId")
+	private LetterDesign letterDesign;
+
 	// user와 일대다 관계 (양방향)
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId")
