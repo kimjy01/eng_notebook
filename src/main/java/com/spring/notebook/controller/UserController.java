@@ -3,6 +3,7 @@ package com.spring.notebook.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -26,6 +27,9 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class UserController  {
 	
+	@Autowired
+	private final UserDetailService userService;
+	
 	@GetMapping("/login")
 	public String login() {
 		return "login";
@@ -33,25 +37,26 @@ public class UserController  {
 	
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/update")
-	public String updatePage(Model model) {
+	public String updatePage(@AuthenticationPrincipal PrincipalDetails principalDetails, Model model) {
 		
-	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-	    String userEmail = authentication.getName();
-	    model.addAttribute("email", userEmail);
-
-	    log.info("User email: " + userEmail);
+	    Users user = principalDetails.getUsers();
+	    
+	    System.out.println(user.getNickname());
+	    
+	    model.addAttribute("nickname", user.getNickname());
 		
 		return "userUpdate";
 	}
 	
 	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/updated")
-	public String updateUser(HttpServletRequest request, Model model) {
+	public String updateUser(@AuthenticationPrincipal PrincipalDetails principalDetails, HttpServletRequest request, Model model) {
 		
-	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-	    String userEmail = authentication.getName();
+		Users user = principalDetails.getUsers();
+		
+		String nickname = request.getParameter("nickname");
+		
+		userService.changeUserNickname(nickname, user.getEmail());
 		
 		return "redirect:/update";
 	}

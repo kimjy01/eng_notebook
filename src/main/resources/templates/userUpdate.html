@@ -7,7 +7,7 @@
 <body>
 <h2>입력하거라</h2>
 <form action="/updated" method="post">
-	<input name="nickname"/>
+	<input name="nickname" th:value="${nickname}"/>
 	<button type="submit">제출...</button>
 </form>
 </body>

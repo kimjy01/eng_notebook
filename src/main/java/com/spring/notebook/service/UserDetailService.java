@@ -26,5 +26,15 @@ public class UserDetailService implements UserDetailsService {
 		
 		return new PrincipalDetails(users);
 	}
+	
+	public void changeUserNickname(String nickname, String email) {
+			
+        Users user = userRepository.findByEmail(email).orElse(null);
+        if (user != null) {
+            user.setNickname(nickname);
+            userRepository.save(user);
+            
+        }
+    }
 
 }
